@@ -35,18 +35,18 @@ jobs:
           export ANDROID_HOME=$HOME/android-sdk
           export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
           yes | sdkmanager --licenses
-          # Instalar duas versões estáveis do build-tools
+          # Instalar duas versões estáveis para garantir o aidl
           yes | sdkmanager --install "platform-tools" "platforms;android-33" "build-tools;33.0.2" "build-tools;34.0.0"
 
-      - name: Check AIDL
+      - name: Select AIDL
         run: |
-          echo "Verificando AIDL nas versões instaladas..."
+          echo "Verificando AIDL..."
           if [ -f "$ANDROID_HOME/build-tools/33.0.2/aidl" ]; then
             echo "Usando AIDL da versão 33.0.2"
-            export PATH=$ANDROID_HOME/build-tools/33.0.2:$PATH
+            echo "export PATH=$ANDROID_HOME/build-tools/33.0.2:\$PATH" >> $GITHUB_ENV
           elif [ -f "$ANDROID_HOME/build-tools/34.0.0/aidl" ]; then
             echo "Usando AIDL da versão 34.0.0"
-            export PATH=$ANDROID_HOME/build-tools/34.0.0:$PATH
+            echo "export PATH=$ANDROID_HOME/build-tools/34.0.0:\$PATH" >> $GITHUB_ENV
           else
             echo "Erro: AIDL não encontrado em nenhuma versão instalada"
             exit 1
