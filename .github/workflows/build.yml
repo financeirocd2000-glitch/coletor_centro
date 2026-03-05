@@ -35,7 +35,7 @@ jobs:
           export ANDROID_HOME=$HOME/android-sdk
           export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
           yes | sdkmanager --licenses
-          sdkmanager --install "platform-tools" "platforms;android-33" "build-tools;33.0.2" "extras;android;m2repository" "extras;google;m2repository"
+          yes | sdkmanager --install "platform-tools" "platforms;android-33" "build-tools;33.0.2" "extras;android;m2repository" "extras;google;m2repository"
 
       - name: Check AIDL
         run: |
